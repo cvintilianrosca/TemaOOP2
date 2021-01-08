@@ -8,7 +8,9 @@ import java.io.File;
 /** Entry point to the simulation */
 public final class Main {
 
-  private Main() {}
+  private Main() {
+
+  }
 
   /**
    * Main function which reads the input file and starts simulation
@@ -23,7 +25,6 @@ public final class Main {
     processInputData.start();
     OutputData outputData = new OutputData();
     outputData.createOutputData(processInputData.getInputData());
-    //        objectMapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
     objectMapper.writeValue(new File(args[1]), outputData);
   }
 }

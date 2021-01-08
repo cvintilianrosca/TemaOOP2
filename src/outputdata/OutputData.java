@@ -12,6 +12,7 @@ public class OutputData {
   private ArrayList<OutputDistributors> distributors = new ArrayList<>();
   private ArrayList<OutputProducers> energyProducers = new ArrayList<>();
 
+  /** Method that copies data into output format */
   public void createOutputData(InputData inputData) {
     for (Consumer consumer : inputData.getInitialData().getConsumers()) {
       consumers.add(
@@ -41,27 +42,27 @@ public class OutputData {
               producer.getMonthlyStats()));
     }
   }
-
+  /** Method that returns consumers List */
   public ArrayList<OutputConsumers> getConsumers() {
     return consumers;
   }
-
+  /** Method that sets consumers List */
   public void setConsumers(ArrayList<OutputConsumers> consumers) {
     this.consumers = consumers;
   }
-
+  /** Method that returns distributors List */
   public ArrayList<OutputDistributors> getDistributors() {
     return distributors;
   }
-
+  /** Method that sets distributors List */
   public void setDistributors(ArrayList<OutputDistributors> distributors) {
     this.distributors = distributors;
   }
-
+  /** Method that returns producers List */
   public ArrayList<OutputProducers> getEnergyProducers() {
     return energyProducers;
   }
-
+  /** Method that sets producers List */
   public void setEnergyProducers(ArrayList<OutputProducers> energyProducers) {
     this.energyProducers = energyProducers;
   }

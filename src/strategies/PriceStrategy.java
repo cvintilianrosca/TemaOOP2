@@ -15,23 +15,23 @@ public class PriceStrategy implements EnergyChoiceStrategy {
     this.distributor = distributor;
     this.inputData = inputData;
   }
-
+  /** Method that returns Distributor */
   public Distributor getDistributor() {
     return distributor;
   }
-
+  /** Method that sets Distributor */
   public void setDistributor(Distributor distributor) {
     this.distributor = distributor;
   }
-
+  /** Method that returns inputData */
   public InputData getInputData() {
     return inputData;
   }
-
+  /** Method that sets inputData */
   public void setInputData(InputData inputData) {
     this.inputData = inputData;
   }
-
+  /** Method that sorts HashMap by price */
   public HashMap priceSortHashMap(final HashMap<Integer, Producer> map) {
     List<Map.Entry<Integer, Producer>> list;
     list = new LinkedList<>();
@@ -53,7 +53,7 @@ public class PriceStrategy implements EnergyChoiceStrategy {
     }
     return sortedHashMap;
   }
-
+  /** Method that sorts HashMap by quantity */
   public HashMap quantitySortHashMap(final HashMap<Integer, Producer> map) {
     List<Map.Entry<Integer, Producer>> list;
     list = new LinkedList<>();
@@ -80,7 +80,7 @@ public class PriceStrategy implements EnergyChoiceStrategy {
     }
     return sortedHashMap;
   }
-
+  /** Method that sorts hashMap by Id */
   public HashMap idSortHashMap(final HashMap<Integer, Producer> map) {
     List<Map.Entry<Integer, Producer>> list;
     list = new LinkedList<>();
@@ -110,6 +110,7 @@ public class PriceStrategy implements EnergyChoiceStrategy {
     return sortedHashMap;
   }
 
+  /** Method that add producer to distributor's List */
   public void setDistributorProducer() {
     int sumEnergy = 0;
 
@@ -127,6 +128,7 @@ public class PriceStrategy implements EnergyChoiceStrategy {
     }
   }
 
+  /** Method that applies the strategy */
   @Override
   public void applyStrategy() {
     for (Producer producer : inputData.getInitialData().getProducers()) {

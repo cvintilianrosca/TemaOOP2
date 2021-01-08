@@ -17,23 +17,23 @@ public class GreenStrategy implements EnergyChoiceStrategy {
     this.distributor = distributor;
     this.inputData = inputData;
   }
-
+  /** Method that returns Distributor */
   public Distributor getDistributor() {
     return distributor;
   }
-
+  /** Method sets returns Distributor */
   public void setDistributor(Distributor distributor) {
     this.distributor = distributor;
   }
-
+  /** Method that returns inputData */
   public InputData getInputData() {
     return inputData;
   }
-
+  /** Method that sets inputData */
   public void setInputData(InputData inputData) {
     this.inputData = inputData;
   }
-
+  /** Method that sorts HashMap by price */
   public HashMap priceSortHashMap(final HashMap<Integer, Producer> map) {
     List<Map.Entry<Integer, Producer>> list;
     list = new LinkedList<>();
@@ -55,7 +55,7 @@ public class GreenStrategy implements EnergyChoiceStrategy {
     }
     return sortedHashMap;
   }
-
+  /** Method that sorts HashMap by quantity */
   public HashMap quantitySortHashMap(final HashMap<Integer, Producer> map) {
     List<Map.Entry<Integer, Producer>> list;
     list = new LinkedList<>();
@@ -82,7 +82,7 @@ public class GreenStrategy implements EnergyChoiceStrategy {
     }
     return sortedHashMap;
   }
-
+  /** Method that sorts HashMap by Id */
   public HashMap idSortHashMap(final HashMap<Integer, Producer> map) {
     List<Map.Entry<Integer, Producer>> list;
     list = new LinkedList<>();
@@ -111,7 +111,7 @@ public class GreenStrategy implements EnergyChoiceStrategy {
     }
     return sortedHashMap;
   }
-
+  /** Method that add producer to distributor's List */
   public void setDistributorProducer() {
     int sumEnergy = 0;
     for (Map.Entry<Integer, Producer> entry : greenHashMap.entrySet()) {
@@ -141,7 +141,7 @@ public class GreenStrategy implements EnergyChoiceStrategy {
       }
     }
   }
-
+  /** Method that applies the strategy */
   @Override
   public void applyStrategy() {
     for (Producer producer : inputData.getInitialData().getProducers()) {

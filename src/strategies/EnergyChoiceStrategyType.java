@@ -7,6 +7,7 @@ public enum EnergyChoiceStrategyType {
   QUANTITY("QUANTITY");
   public final String label;
 
+  /** Method that sets energyType */
   EnergyChoiceStrategyType(String label) {
     this.label = label;
   }

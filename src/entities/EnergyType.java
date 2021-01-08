@@ -16,11 +16,11 @@ public enum EnergyType {
     this.label = label;
     this.renewable = renewable;
   }
-
+  /** Method that returns label type */
   public String getLabel() {
     return label;
   }
-
+  /** Method that returns isRenewable */
   public boolean isRenewable() {
     return renewable;
   }

@@ -16,30 +16,31 @@ public class QuantityStrategy implements EnergyChoiceStrategy {
     this.inputData = inputData;
   }
 
+  /** Method that returns quantity distributor hashMap */
   public HashMap<Integer, Integer> getQuantityDistributorHashMap() {
     return quantityDistributorHashMap;
   }
-
+  /** Method that sets quantity distributor hashMap */
   public void setQuantityDistributorHashMap(HashMap<Integer, Integer> quantityDistributorHashMap) {
     this.quantityDistributorHashMap = quantityDistributorHashMap;
   }
-
+  /** Method that returns Distributor */
   public Distributor getDistributor() {
     return distributor;
   }
-
+  /** Method that sets Distributor */
   public void setDistributor(Distributor distributor) {
     this.distributor = distributor;
   }
-
+  /** Method that returns inputData */
   public InputData getInputData() {
     return inputData;
   }
-
+  /** Method that sets inputData */
   public void setInputData(InputData inputData) {
     this.inputData = inputData;
   }
-
+  /** Method that sorts HashMap */
   public HashMap sortHashMap(final HashMap map) {
     List<Map.Entry> list;
     list = new LinkedList<Map.Entry>(map.entrySet());
@@ -51,7 +52,7 @@ public class QuantityStrategy implements EnergyChoiceStrategy {
     }
     return sortedHashMap;
   }
-
+  /** Method that sorts HashMap by quantity */
   public HashMap sortHashMapModified(final HashMap map) {
     List<Map.Entry> list;
     list = new LinkedList<Map.Entry>(map.entrySet());
@@ -69,7 +70,7 @@ public class QuantityStrategy implements EnergyChoiceStrategy {
     }
     return sortedHashMap;
   }
-
+  /** Method that finds a producer by ID */
   public Producer findProducerByID(int Id) {
     for (Producer producer : inputData.getInitialData().getProducers()) {
       if (producer.getId() == Id) {
@@ -78,7 +79,7 @@ public class QuantityStrategy implements EnergyChoiceStrategy {
     }
     return null;
   }
-
+  /** Method that add producer to distributor's List */
   public void setDistributorProducer() {
     int sumEnergy = 0;
     for (Map.Entry<Integer, Integer> entry : quantityDistributorHashMap.entrySet()) {
@@ -95,7 +96,7 @@ public class QuantityStrategy implements EnergyChoiceStrategy {
       }
     }
   }
-
+  /** Method that applies the strategy */
   @Override
   public void applyStrategy() {
 

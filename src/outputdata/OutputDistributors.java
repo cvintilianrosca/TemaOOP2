@@ -30,59 +30,59 @@ public class OutputDistributors {
     this.isBankrupt = isBankrupt;
     this.producerStrategy = producerStrategy;
   }
-
+  /** Method that returns distributor Id */
   public int getId() {
     return id;
   }
-
+  /** Method that sets Id */
   public void setId(int id) {
     this.id = id;
   }
-
+  /** Method that returns energy needed */
   public int getEnergyNeededKW() {
     return energyNeededKW;
   }
-
+  /** Method that sets energy needed */
   public void setEnergyNeededKW(int energyNeededKW) {
     this.energyNeededKW = energyNeededKW;
   }
-
+  /** Method that returns contract price */
   public int getContractCost() {
     return contractCost;
   }
-
+  /** Method that sets contract price */
   public void setContractCost(int contractCost) {
     this.contractCost = contractCost;
   }
-
+  /** Method that returns budget */
   public int getBudget() {
     return budget;
   }
-
+  /** Method that sets budget */
   public void setBudget(int budget) {
     this.budget = budget;
   }
-
+  /** Method that returns strategy */
   public EnergyChoiceStrategyType getProducerStrategy() {
     return producerStrategy;
   }
-
+  /** Method that sets strategy */
   public void setProducerStrategy(EnergyChoiceStrategyType producerStrategy) {
     this.producerStrategy = producerStrategy;
   }
-
+  /** Method that returns isBankrupt status */
   public boolean getisBankrupt() {
     return isBankrupt;
   }
-
+  /** Method that sets isBankrupt status */
   public void setisBankrupt(boolean bankrupt) {
     isBankrupt = bankrupt;
   }
-
+  /** Method that returns contracts List */
   public ArrayList<Contracts> getContracts() {
     return contracts;
   }
-
+  /** Method that sets contracts List */
   public void setContracts(ArrayList<Contracts> contracts) {
     this.contracts = contracts;
   }

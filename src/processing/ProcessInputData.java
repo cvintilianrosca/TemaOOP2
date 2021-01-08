@@ -9,12 +9,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ProcessInputData {
-  InputData inputData;
+  private InputData inputData;
 
   public ProcessInputData(InputData inputData) {
     this.inputData = inputData;
   }
 
+  /** Method that finds a distributor by its Id */
   public Distributor findDistributor(final int id) {
     for (Distributor distributor : inputData.getInitialData().getDistributors()) {
       if (distributor.getId() == id) {
@@ -24,6 +25,7 @@ public class ProcessInputData {
     return null;
   }
 
+  /** Method that returns the distributor with the best price */
   public Distributor findBestDistributorPrice() {
     long min = 0;
     Distributor distributorsMinimumPrice = null;
@@ -45,6 +47,7 @@ public class ProcessInputData {
     return distributorsMinimumPrice;
   }
 
+  /** Method that creates the connection between consumer and distributor */
   public void relateConsumerWithDistributor(Consumer consumer) {
     Distributor distributorBestPrice = findBestDistributorPrice();
     consumer.setDistributorID(distributorBestPrice.getId());
@@ -59,6 +62,7 @@ public class ProcessInputData {
                 distributorBestPrice.getContractLength()));
   }
 
+  /** Method that decrement number contract month */
   public void decrementContractMonth(final Distributor distributors, final int consumerID) {
     for (Contracts contract : distributors.getContracts()) {
       if (contract.getConsumerId() == consumerID) {
@@ -67,6 +71,7 @@ public class ProcessInputData {
     }
   }
 
+  /** Method that simulate first month of the electrical energy system */
   public void firstMonth() {
     for (Distributor distributor : inputData.getInitialData().getDistributors()) {
       EnergyChoiceStrategyFactory.createStrategy(
@@ -99,6 +104,7 @@ public class ProcessInputData {
     }
   }
 
+  /** Method that finds a producer by its ID */
   public Producer findProducerById(int producerId) {
     for (Producer producer : inputData.getInitialData().getProducers()) {
       if (producer.getId() == producerId) {
@@ -108,6 +114,7 @@ public class ProcessInputData {
     return null;
   }
 
+  /** Method that updates Lists every month */
   public void makeUpdates(MonthlyUpdates monthlyUpdate) {
     for (ConsumerUpdates consumerUpdate : monthlyUpdate.getNewConsumers()) {
       Consumer consumer = new Consumer();
@@ -122,6 +129,7 @@ public class ProcessInputData {
     }
   }
 
+  /** Method that updates the producerList */
   public boolean makeProducerUpdates(MonthlyUpdates monthlyUpdate) {
     boolean flag = false;
     if (monthlyUpdate.getProducerChanges().size() != 0) {
@@ -134,6 +142,7 @@ public class ProcessInputData {
     return flag;
   }
 
+  /** Method that simulate every month */
   public void startMonthSimulation() {
     int monthNumber = 1;
 
@@ -293,12 +302,19 @@ public class ProcessInputData {
     }
   }
 
+  /** Method that starts the simulation */
   public void start() {
     firstMonth();
     startMonthSimulation();
   }
 
+  /** Method that returns modified inputData */
   public InputData getInputData() {
     return inputData;
+  }
+
+  /** Method that sets InputData */
+  public void setInputData(InputData inputData) {
+    this.inputData = inputData;
   }
 }

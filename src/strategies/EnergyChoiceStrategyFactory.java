@@ -4,7 +4,7 @@ import readentities.Distributor;
 import readentities.InputData;
 
 public class EnergyChoiceStrategyFactory {
-
+  /** Method that returns created strategy */
   public static EnergyChoiceStrategy createStrategy(
       EnergyChoiceStrategyType energyChoiceStrategyType,
       Distributor distributor,
