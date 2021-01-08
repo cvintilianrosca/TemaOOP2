@@ -11,6 +11,7 @@ public class OutputConsumers {
         this.isBankrupt=isBankrupt;
     }
 
+
     public int getId() {
         return id;
     }
