@@ -200,8 +200,6 @@ public final class Test {
             try {
                 var actual = objectMapper.readTree(TEST_OUT_FILE);
                 var expected = objectMapper.readTree(refFile);
-                System.out.println(actual);
-                System.out.println(expected);
 
                 final int testScore = testMaxScore(config, testFileName);
                 totalScore += testScore;

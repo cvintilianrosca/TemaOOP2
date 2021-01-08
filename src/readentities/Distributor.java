@@ -5,186 +5,192 @@ import strategies.EnergyChoiceStrategyType;
 import java.util.ArrayList;
 
 public class Distributor {
-    private int id;
-    private int contractLength;
-    private int initialBudget;
-    private int initialInfrastructureCost;
-    private int energyNeededKW;
-    private int initialProductionCost;
-    private long contractPrice;
-    private long profit;
-    private int monthlyExpenses;
-    private ArrayList<Contracts> contracts = new ArrayList<>();
-    private EnergyChoiceStrategyType producerStrategy;
-    private boolean isBankrupt;
-    private ArrayList<Producer> producerList = new ArrayList<>();
+  private int id;
+  private int contractLength;
+  private int initialBudget;
+  private int initialInfrastructureCost;
+  private int energyNeededKW;
+  private int initialProductionCost;
+  private long contractPrice;
+  private long profit;
+  private int monthlyExpenses;
+  private ArrayList<Contracts> contracts = new ArrayList<>();
+  private EnergyChoiceStrategyType producerStrategy;
+  private boolean isBankrupt;
+  private ArrayList<Producer> producerList = new ArrayList<>();
 
+  public void addProfit(final long profitConsumer) {
+    initialBudget += profitConsumer;
+  }
 
-    public void addProfit(final long profitConsumer) {
-        initialBudget += profitConsumer;
+  public void computeInitialProductionCost() {
+    int cost = 0;
+    for (Producer producer : producerList) {
+      cost += (producer.getEnergyPerDistributor() * producer.getPriceKW());
     }
+    initialProductionCost = (int) Math.round(Math.floor(cost / 10));
+  }
 
+  public void computeProfit() {
+    final double multiplier = 0.2;
+    setProfit((int) Math.round(Math.floor(multiplier * initialProductionCost)));
+  }
 
-    public void computeInitialProductionCost(){
-        int cost =0;
-        for (Producer producer : producerList) {
-            cost+=(producer.getEnergyPerDistributor()*producer.getPriceKW());
-        }
-        initialProductionCost=(int)Math.round(Math.floor(cost / 10));
+  public void computeContractPrice() {
+    if (contracts.size() == 0) {
+      this.contractPrice = initialInfrastructureCost + initialProductionCost + profit;
+    } else {
+      this.contractPrice =
+          Math.round(
+              Math.floor(((float) initialInfrastructureCost / (float) contracts.size()))
+                  + initialProductionCost
+                  + profit);
     }
+  }
 
-
-
-    public void computeProfit() {
-        final double multiplier = 0.2;
-        setProfit((int) Math.round(Math.floor(multiplier * initialProductionCost)));
+  public void pay() {
+    if (!isBankrupt) {
+      if (initialBudget - (initialInfrastructureCost + initialProductionCost * contracts.size())
+          < 0) {
+        isBankrupt = true;
+      }
+      initialBudget -= (initialInfrastructureCost + initialProductionCost * contracts.size());
     }
+  }
 
-    public void computeContractPrice() {
-        if (contracts.size() == 0) {
-            this.contractPrice = initialInfrastructureCost + initialProductionCost + profit;
-        } else {
-            this.contractPrice =
-                    Math.round(
-                            Math.floor(((float) initialInfrastructureCost / (float) contracts.size()))
-                                    + initialProductionCost
-                                    + profit);
-        }
-    }
+  public long getProfit() {
+    return profit;
+  }
 
-    public void pay() {
-        if (!isBankrupt) {
-            if (initialBudget - (initialInfrastructureCost + initialProductionCost * contracts.size())
-                    < 0) {
-                isBankrupt = true;
-            }
-            initialBudget -= (initialInfrastructureCost + initialProductionCost * contracts.size());
-        }
-    }
+  public void setProfit(long profit) {
+    this.profit = profit;
+  }
 
-    public long getProfit() {
-        return profit;
-    }
+  public int getMonthlyExpenses() {
+    return monthlyExpenses;
+  }
 
-    public void setProfit(long profit) {
-        this.profit = profit;
-    }
+  public void setMonthlyExpenses(int monthlyExpenses) {
+    this.monthlyExpenses = monthlyExpenses;
+  }
 
-    public int getMonthlyExpenses() {
-        return monthlyExpenses;
-    }
+  public ArrayList<Producer> getProducerList() {
+    return producerList;
+  }
 
-    public void setMonthlyExpenses(int monthlyExpenses) {
-        this.monthlyExpenses = monthlyExpenses;
-    }
+  public void setProducerList(ArrayList<Producer> producerList) {
+    this.producerList = producerList;
+  }
 
+  public int getInitialProductionCost() {
+    return initialProductionCost;
+  }
 
+  public void setInitialProductionCost(int initialProductionCost) {
+    this.initialProductionCost = initialProductionCost;
+  }
 
+  public long getContractPrice() {
+    return contractPrice;
+  }
 
-    public ArrayList<Producer> getProducerList() {
-        return producerList;
-    }
+  public void setContractPrice(long contractPrice) {
+    this.contractPrice = contractPrice;
+  }
 
-    public void setProducerList(ArrayList<Producer> producerList) {
-        this.producerList = producerList;
-    }
+  public ArrayList<Contracts> getContracts() {
+    return contracts;
+  }
 
-    public int getInitialProductionCost() {
-        return initialProductionCost;
-    }
+  public void setContracts(ArrayList<Contracts> contracts) {
+    this.contracts = contracts;
+  }
 
-    public void setInitialProductionCost(int initialProductionCost) {
-        this.initialProductionCost = initialProductionCost;
-    }
+  public boolean isBankrupt() {
+    return isBankrupt;
+  }
 
-    public long getContractPrice() {
-        return contractPrice;
-    }
+  public void setBankrupt(boolean bankrupt) {
+    this.isBankrupt = bankrupt;
+  }
 
-    public void setContractPrice(long contractPrice) {
-        this.contractPrice = contractPrice;
-    }
+  public int getId() {
+    return id;
+  }
 
-    public ArrayList<Contracts> getContracts() {
-        return contracts;
-    }
+  public void setId(int id) {
+    this.id = id;
+  }
 
-    public void setContracts(ArrayList<Contracts> contracts) {
-        this.contracts = contracts;
-    }
+  public int getContractLength() {
+    return contractLength;
+  }
 
-    public boolean isBankrupt() {
-        return isBankrupt;
-    }
+  public void setContractLength(int contractLength) {
+    this.contractLength = contractLength;
+  }
 
-    public void setBankrupt(boolean bankrupt) {
-        this.isBankrupt = bankrupt;
-    }
+  public int getInitialBudget() {
+    return initialBudget;
+  }
 
-    public int getId() {
-        return id;
-    }
+  public void setInitialBudget(int initialBudget) {
+    this.initialBudget = initialBudget;
+  }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+  public int getInitialInfrastructureCost() {
+    return initialInfrastructureCost;
+  }
 
-    public int getContractLength() {
-        return contractLength;
-    }
+  public void setInitialInfrastructureCost(int initialInfrastructureCost) {
+    this.initialInfrastructureCost = initialInfrastructureCost;
+  }
 
-    public void setContractLength(int contractLength) {
-        this.contractLength = contractLength;
-    }
+  public int getEnergyNeededKW() {
+    return energyNeededKW;
+  }
 
-    public int getInitialBudget() {
-        return initialBudget;
-    }
+  public void setEnergyNeededKW(int energyNeededKW) {
+    this.energyNeededKW = energyNeededKW;
+  }
 
-    public void setInitialBudget(int initialBudget) {
-        this.initialBudget = initialBudget;
-    }
+  public EnergyChoiceStrategyType getProducerStrategy() {
+    return producerStrategy;
+  }
 
-    public int getInitialInfrastructureCost() {
-        return initialInfrastructureCost;
-    }
+  public void setProducerStrategy(EnergyChoiceStrategyType producerStrategy) {
+    this.producerStrategy = producerStrategy;
+  }
 
-    public void setInitialInfrastructureCost(int initialInfrastructureCost) {
-        this.initialInfrastructureCost = initialInfrastructureCost;
-    }
-
-    public int getEnergyNeededKW() {
-        return energyNeededKW;
-    }
-
-    public void setEnergyNeededKW(int energyNeededKW) {
-        this.energyNeededKW = energyNeededKW;
-    }
-
-    public EnergyChoiceStrategyType getProducerStrategy() {
-        return producerStrategy;
-    }
-
-    public void setProducerStrategy(EnergyChoiceStrategyType producerStrategy) {
-        this.producerStrategy = producerStrategy;
-    }
-
-    @Override
-    public String toString() {
-        return "Distributor{" +
-                "id=" + id +
-                ", contractLength=" + contractLength +
-                ", initialBudget=" + initialBudget +
-                ", initialInfrastructureCost=" + initialInfrastructureCost +
-                ", energyNeededKW=" + energyNeededKW +
-                ", initialProductionCost=" + initialProductionCost +
-                ", contractPrice=" + contractPrice +
-                ", profit=" + profit +
-                ", monthlyExpenses=" + monthlyExpenses +
-                ", contracts=" + contracts +
-                ", producerStrategy=" + producerStrategy +
-                ", isBankrupt=" + isBankrupt +
-                ", producerList=" + producerList +
-                '}';
-    }
+  @Override
+  public String toString() {
+    return "Distributor{"
+        + "id="
+        + id
+        + ", contractLength="
+        + contractLength
+        + ", initialBudget="
+        + initialBudget
+        + ", initialInfrastructureCost="
+        + initialInfrastructureCost
+        + ", energyNeededKW="
+        + energyNeededKW
+        + ", initialProductionCost="
+        + initialProductionCost
+        + ", contractPrice="
+        + contractPrice
+        + ", profit="
+        + profit
+        + ", monthlyExpenses="
+        + monthlyExpenses
+        + ", contracts="
+        + contracts
+        + ", producerStrategy="
+        + producerStrategy
+        + ", isBankrupt="
+        + isBankrupt
+        + ", producerList="
+        + producerList
+        + '}';
+  }
 }
