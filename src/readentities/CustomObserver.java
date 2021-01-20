@@ -1,5 +1,6 @@
 package readentities;
 
 public interface CustomObserver {
-    public void update();
+  /** Method that updates all producers */
+   void update();
 }

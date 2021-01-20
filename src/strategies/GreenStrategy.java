@@ -5,7 +5,12 @@ import readentities.Distributor;
 import readentities.InputData;
 import readentities.Producer;
 
-import java.util.*;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 public class GreenStrategy implements EnergyChoiceStrategy {
   private Distributor distributor;
@@ -116,7 +121,6 @@ public class GreenStrategy implements EnergyChoiceStrategy {
     int sumEnergy = 0;
     for (Map.Entry<Integer, Producer> entry : greenHashMap.entrySet()) {
       if (entry.getValue().getNumberDistributors() < entry.getValue().getMaxDistributors()) {
-        // partea cara adauga distribuitor
         if (sumEnergy - distributor.getEnergyNeededKW() < 0) {
           distributor.getProducerList().add(entry.getValue());
           sumEnergy += entry.getValue().getEnergyPerDistributor();

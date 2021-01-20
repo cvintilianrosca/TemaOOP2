@@ -1,6 +1,8 @@
 package readentities;
 
 public interface CustomObservable {
-    void attach();
-    void notifyAllObservers();
+  /** Method that add all the observers */
+  void attach();
+  /** Method that notifies all the observers */
+  void notifyAllObservers();
 }

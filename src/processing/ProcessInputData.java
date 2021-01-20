@@ -1,12 +1,17 @@
 package processing;
 
-import readentities.*;
+import readentities.Consumer;
+import readentities.ConsumerUpdates;
+import readentities.Contracts;
+import readentities.Distributor;
+import readentities.DistributorUpdates;
+import readentities.InputData;
+import readentities.MonthlyStats;
+import readentities.MonthlyUpdates;
+import readentities.Producer;
+import readentities.ProducerUpdates;
+import readentities.Subject;
 import strategies.EnergyChoiceStrategyFactory;
-
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class ProcessInputData {
   private InputData inputData;
@@ -242,7 +247,7 @@ public class ProcessInputData {
               monthFlag = true;
             }
           }
-          if (monthFlag == false) {
+          if (!monthFlag) {
             MonthlyStats monthlyStats = new MonthlyStats();
             monthlyStats.setMonth(monthNumber);
             monthlyStats.getDistributorsIds().add(distributor.getId());

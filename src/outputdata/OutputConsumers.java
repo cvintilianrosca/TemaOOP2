@@ -14,7 +14,7 @@ public class OutputConsumers extends Entity {
   }
   /** Method that sets consumer ID */
   public void setId(int id) {
-     super.setId(id);
+    super.setId(id);
   }
   /** Method that returns isBankrupt status */
   public boolean getisBankrupt() {
@@ -26,10 +26,10 @@ public class OutputConsumers extends Entity {
   }
   /** Method that returns budget */
   public int getBudget() {
-   return super.getBudget();
+    return super.getBudget();
   }
   /** Method that sets budget */
   public void setBudget(int budget) {
-   super.setBudget(budget);
+    super.setBudget(budget);
   }
 }

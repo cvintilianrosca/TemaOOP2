@@ -4,7 +4,11 @@ import readentities.Distributor;
 import readentities.InputData;
 import readentities.Producer;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 public class QuantityStrategy implements EnergyChoiceStrategy {
   private Distributor distributor;
@@ -71,9 +75,9 @@ public class QuantityStrategy implements EnergyChoiceStrategy {
     return sortedHashMap;
   }
   /** Method that finds a producer by ID */
-  public Producer findProducerByID(int Id) {
+  public Producer findProducerByID(int iD) {
     for (Producer producer : inputData.getInitialData().getProducers()) {
-      if (producer.getId() == Id) {
+      if (producer.getId() == iD) {
         return producer;
       }
     }

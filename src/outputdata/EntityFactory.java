@@ -19,17 +19,12 @@ public final class EntityFactory {
                                       final boolean isBankrupt,
                                       final ArrayList<Contracts> contractsList,
                                       final int energyNeededKW,
-                                     final int contractCost,
-                                     final   EnergyChoiceStrategyType producerStrategy) {
+                                      final int contractCost,
+                                      final EnergyChoiceStrategyType producerStrategy) {
         return switch (entityType) {
             case Consumer -> new OutputConsumers(id,  isBankrupt, initialBudget);
-            case Distributor -> new OutputDistributors(  id,
-            energyNeededKW,
-             contractCost,
-            initialBudget,
-            producerStrategy,
-             isBankrupt,
-             contractsList);
+            case Distributor -> new OutputDistributors(id, energyNeededKW, contractCost,
+                    initialBudget, producerStrategy, isBankrupt, contractsList);
         };
     }
 

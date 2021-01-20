@@ -19,16 +19,15 @@ public class Distributor implements CustomObserver {
   private EnergyChoiceStrategyType producerStrategy;
   private boolean isBankrupt;
   private ArrayList<Producer> producerList = new ArrayList<>();
-
+  private InputData inputData;
+  /** Method that returns InputData */
   public InputData getInputData() {
     return inputData;
   }
-
+  /** Method that sets InputData */
   public void setInputData(InputData inputData) {
     this.inputData = inputData;
   }
-
-  private InputData inputData;
 
   /** Method that adds profit every month */
   public void addProfit(final long profitConsumer) {
@@ -36,11 +35,12 @@ public class Distributor implements CustomObserver {
   }
   /** Method that computes initial production cost */
   public void computeInitialProductionCost() {
+    final int number = 10;
     int cost = 0;
     for (Producer producer : producerList) {
       cost += (producer.getEnergyPerDistributor() * producer.getPriceKW());
     }
-    initialProductionCost = (int) Math.round(Math.floor(cost / 10));
+    initialProductionCost = (int) Math.round(Math.floor(cost / number));
   }
   /** Method that computes profit */
   public void computeProfit() {
@@ -205,11 +205,10 @@ public class Distributor implements CustomObserver {
         + producerList
         + '}';
   }
-
+  /** Method that updates producers */
   @Override
   public void update() {
-    EnergyChoiceStrategyFactory.createStrategy(
-            this.getProducerStrategy(), this, inputData).applyStrategy();
+    EnergyChoiceStrategyFactory.createStrategy(this.getProducerStrategy(), this, inputData)
+        .applyStrategy();
   }
-
 }
