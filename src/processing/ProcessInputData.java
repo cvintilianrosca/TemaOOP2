@@ -228,42 +228,13 @@ public class ProcessInputData {
       }
 
       if (makeProducerUpdates(monthlyUpdate)) {
-        List<Integer> distributorsToUpdateList = new ArrayList<>();
-
-        for (ProducerUpdates producerUpdates : monthlyUpdate.getProducerChanges()) {
-          Producer producer = findProducerById(producerUpdates.getId());
-          distributorsToUpdateList.addAll(producer.getDistributorIdList());
-        }
-
-        List<Integer> newList =
-            distributorsToUpdateList.stream().distinct().collect(Collectors.toList());
-
-        ArrayList<Integer> distributorSorted = new ArrayList<>(newList);
-
-        distributorSorted.sort(
-            new Comparator<Integer>() {
-              @Override
-              public int compare(Integer o1, Integer o2) {
-                return Integer.compare(o1, o2);
-              }
-            });
-
-        for (Integer id : distributorSorted) {
-          Distributor distributor = findDistributor(id);
-          distributor.getProducerList().clear();
-
-          for (Producer producer : inputData.getInitialData().getProducers()) {
-            if (producer.getDistributorIdList().contains(id)) {
-              producer.getDistributorIdList().remove(id);
-              producer.decrementNumberDistributor();
-            }
-          }
-          EnergyChoiceStrategyFactory.createStrategy(
-                  distributor.getProducerStrategy(), distributor, inputData)
-              .applyStrategy();
-          distributor.computeInitialProductionCost();
-        }
+        Subject subject = new Subject(monthlyUpdate, inputData);
+        subject.attach();
+        subject.notifyAllObservers();
       }
+
+
+
 
       for (Distributor distributor : inputData.getInitialData().getDistributors()) {
         for (Producer producer : distributor.getProducerList()) {

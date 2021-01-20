@@ -1,10 +1,11 @@
 package readentities;
 
+import strategies.EnergyChoiceStrategyFactory;
 import strategies.EnergyChoiceStrategyType;
 
 import java.util.ArrayList;
 
-public class Distributor {
+public class Distributor implements CustomObserver {
   private int id;
   private int contractLength;
   private int initialBudget;
@@ -18,6 +19,16 @@ public class Distributor {
   private EnergyChoiceStrategyType producerStrategy;
   private boolean isBankrupt;
   private ArrayList<Producer> producerList = new ArrayList<>();
+
+  public InputData getInputData() {
+    return inputData;
+  }
+
+  public void setInputData(InputData inputData) {
+    this.inputData = inputData;
+  }
+
+  private InputData inputData;
 
   /** Method that adds profit every month */
   public void addProfit(final long profitConsumer) {
@@ -194,4 +205,11 @@ public class Distributor {
         + producerList
         + '}';
   }
+
+  @Override
+  public void update() {
+    EnergyChoiceStrategyFactory.createStrategy(
+            this.getProducerStrategy(), this, inputData).applyStrategy();
+  }
+
 }
