@@ -23,7 +23,7 @@ public final class Main {
     InputData inputData = objectMapper.readValue(new File(args[0]), InputData.class);
     ProcessInputData processInputData = new ProcessInputData(inputData);
     processInputData.start();
-    OutputData outputData = new OutputData();
+    OutputData outputData = OutputData.getInstance();
     outputData.createOutputData(processInputData.getInputData());
     objectMapper.writeValue(new File(args[1]), outputData);
   }

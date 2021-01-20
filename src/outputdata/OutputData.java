@@ -8,6 +8,15 @@ import readentities.Producer;
 import java.util.ArrayList;
 
 public class OutputData {
+
+  private OutputData instance=null;
+
+  private OutputData(){
+
+  }
+  public static OutputData getInstance(){
+    return new OutputData();
+  }
   private ArrayList<OutputConsumers> consumers = new ArrayList<>();
   private ArrayList<OutputDistributors> distributors = new ArrayList<>();
   private ArrayList<OutputProducers> energyProducers = new ArrayList<>();
@@ -16,19 +25,22 @@ public class OutputData {
   public void createOutputData(InputData inputData) {
     for (Consumer consumer : inputData.getInitialData().getConsumers()) {
       consumers.add(
-          new OutputConsumers(
-              consumer.getId(), consumer.isBankrupt(), consumer.getInitialBudget()));
+              (OutputConsumers) EntityFactory.createEntity(EntityFactory.EntityType.Consumer,
+                      consumer.getId(), consumer.getInitialBudget(),
+                      consumer.isBankrupt(), null, 0, 0,
+                      null));
     }
     for (Distributor distributor : inputData.getInitialData().getDistributors()) {
       distributors.add(
-          new OutputDistributors(
-              distributor.getId(),
-              distributor.getEnergyNeededKW(),
-              (int) distributor.getContractPrice(),
-              distributor.getInitialBudget(),
-              distributor.getProducerStrategy(),
-              distributor.isBankrupt(),
-              distributor.getContracts()));
+              (OutputDistributors) EntityFactory.createEntity(
+                  EntityFactory.EntityType.Distributor,
+                  distributor.getId(),
+                  distributor.getInitialBudget(),
+                  distributor.isBankrupt(),
+                  distributor.getContracts(),
+                  distributor.getEnergyNeededKW(),
+                      (int) distributor.getContractPrice(),
+                  distributor.getProducerStrategy()));
     }
 
     for (Producer producer : inputData.getInitialData().getProducers()) {

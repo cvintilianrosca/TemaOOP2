@@ -5,7 +5,7 @@ import strategies.EnergyChoiceStrategyType;
 
 import java.util.ArrayList;
 
-public class OutputDistributors {
+public class OutputDistributors extends Entity {
   private int id;
   private int energyNeededKW;
   private int contractCost;
@@ -22,21 +22,19 @@ public class OutputDistributors {
       EnergyChoiceStrategyType producerStrategy,
       boolean isBankrupt,
       ArrayList<Contracts> contracts) {
-    this.id = id;
-    this.budget = budget;
+    super(id, budget, isBankrupt);
     this.contractCost = contractCost;
     this.contracts = contracts;
     this.energyNeededKW = energyNeededKW;
-    this.isBankrupt = isBankrupt;
     this.producerStrategy = producerStrategy;
   }
   /** Method that returns distributor Id */
   public int getId() {
-    return id;
+    return super.getId();
   }
   /** Method that sets Id */
   public void setId(int id) {
-    this.id = id;
+    super.setId(id);
   }
   /** Method that returns energy needed */
   public int getEnergyNeededKW() {
@@ -56,11 +54,11 @@ public class OutputDistributors {
   }
   /** Method that returns budget */
   public int getBudget() {
-    return budget;
+    return super.getBudget();
   }
   /** Method that sets budget */
   public void setBudget(int budget) {
-    this.budget = budget;
+    super.setBudget(budget);
   }
   /** Method that returns strategy */
   public EnergyChoiceStrategyType getProducerStrategy() {
@@ -72,11 +70,11 @@ public class OutputDistributors {
   }
   /** Method that returns isBankrupt status */
   public boolean getisBankrupt() {
-    return isBankrupt;
+    return super.getisBankrupt();
   }
   /** Method that sets isBankrupt status */
   public void setisBankrupt(boolean bankrupt) {
-    isBankrupt = bankrupt;
+    super.setBankrupt(bankrupt);
   }
   /** Method that returns contracts List */
   public ArrayList<Contracts> getContracts() {

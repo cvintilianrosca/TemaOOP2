@@ -233,9 +233,6 @@ public class ProcessInputData {
         subject.notifyAllObservers();
       }
 
-
-
-
       for (Distributor distributor : inputData.getInitialData().getDistributors()) {
         for (Producer producer : distributor.getProducerList()) {
           boolean monthFlag = false;
